@@ -1,20 +1,22 @@
 #!/usr/bin/python3
-"""method that determines if all the boxes can be opened"""
+"""
+    This module contains the canUnlockAll function.
+"""
+
 
 def canUnlockAll(boxes):
-
-    if (type(boxes) is not list):
-        return False
-
-    if (len(boxes) == 0):
-        return False
-
+    """Method that determines if all the boxes can be opened
+        Arg:
+            boxes: Is a list of lists.
+    """
+    box = len(boxes) * [False]
+    box[0] = True
     keys = [0]
-    for i in keys:
-        for j in boxes[i]:
-            if j not in keys and j != i and j < len(boxes) and j != 0:
-                keys.append(j)
-    if len(keys) == len(boxes):
-        return True
-    else:
-        return False
+
+    for each in keys:
+        for i in boxes[each]:
+            if i not in keys:
+                if i < len(boxes):
+                    box[i] = True
+                    keys.append(i)
+    return all(box)
